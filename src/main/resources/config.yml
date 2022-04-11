@@ -1,0 +1,23 @@
+# Here is where you can add your own custom emotes for keywords.
+# Simply specify the keyword you wish to use on the SAME INDENTATION LINE as the examples below, followed by a colon,
+# then paste your emote.
+
+# Always include QUOTATION MARKS around your emote to prevent print errors when using codes
+
+keywords:
+  bear: '#123456ʕ &4•ᴥ•#123456ʔ'
+  happy: '&e◉‿◉'
+  sad: '(︶︹︺)'
+
+# Below is the error that will be sent to users when they attempt to run the '/keywords' command without sufficient
+# permissions. For no message, set the text to ''
+
+cmd-permission-error: '&4You do not have permission to run that command!'
+
+# Below is the text that appears above and below the list of keywords/emotes when the '/keywords' command is executed.
+# For no message, set the text to ''
+
+list-cmd-topln: '&aList of Emotes and Keywords:'
+list-cmd-bottomln: '&aClick to use!'
+
+# IMPORTANT NOTE: Usage of color codes and HEX codes is supported

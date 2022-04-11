@@ -1,0 +1,10 @@
+name: Keywords
+version: '${project.version}'
+main: me.cahrypt.com.keywords.Keywords
+api-version: 1.18
+authors: [ cahrypt ]
+description: Allows server operators to have custom keywords that default to other messages, characters, or emojis!
+commands:
+  keywords:
+    usage: /keyword
+    description: View all emotes and their keywords!
