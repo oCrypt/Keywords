@@ -7,14 +7,20 @@ import java.util.Set;
 
 public class ConfigManager {
     private final Keywords main;
-    private final FileConfiguration config;
+    private FileConfiguration config;
 
     public ConfigManager() {
-        main = Keywords.getInstance();
-        config = main.getConfig();
+        this.main = Keywords.getInstance();
+        this.config = main.getConfig();
 
         config.options().copyDefaults();
         main.saveDefaultConfig();
+    }
+
+    public void reload() {
+        main.reloadConfig();
+        main.saveDefaultConfig();
+        config = main.getConfig();
     }
 
     public String getReplacement(String keyword) {

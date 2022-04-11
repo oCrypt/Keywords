@@ -9,16 +9,12 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 
-import java.util.Set;
-
 public class TalkListener implements Listener {
     private final ConfigManager config;
-    private final Set<String> keywords;
 
     public TalkListener() {
         Bukkit.getPluginManager().registerEvents(this, Keywords.getInstance());
         config = Keywords.getConfigManager();
-        keywords = config.getKeywords();
     }
 
     @EventHandler
@@ -35,7 +31,7 @@ public class TalkListener implements Listener {
 
     public String refactorMessage(String message) {
         String refactored = message;
-        for (String key : keywords) {
+        for (String key : config.getKeywords()) {
             refactored = refactored.replace(":" + key + ":", ColorUtil.translateCodes(config.getReplacement(key)));
         }
         return refactored;
