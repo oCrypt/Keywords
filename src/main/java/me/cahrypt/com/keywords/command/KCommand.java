@@ -3,7 +3,7 @@ package me.cahrypt.com.keywords.command;
 import me.cahrypt.com.keywords.Keywords;
 import me.cahrypt.com.keywords.command.argument.Argument;
 import me.cahrypt.com.keywords.config.ConfigManager;
-import me.cahrypt.com.keywords.utils.ColorUtil;
+import me.cahrypt.com.keywords.container.Container;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
@@ -19,7 +19,7 @@ public class KCommand implements CommandExecutor {
     private final Argument[] arguments;
 
     public KCommand(Argument... arguments) {
-        this.config = Keywords.getConfigManager();
+        this.config = Keywords.getInstance().getConfigManager();
         this.arguments = arguments;
     }
 
@@ -30,13 +30,7 @@ public class KCommand implements CommandExecutor {
             return true;
         }
 
-        String cmdPermError = ColorUtil.translateCodes(config.getCmdPermError());
-
-        if (!player.hasPermission("keywords.cmd")) {
-            player.sendMessage(cmdPermError);
-            return true;
-        }
-
+        String cmdPermError = config.getCmdPermError();
         Optional<Argument> rawArgument = getArgument(args);
 
         if (rawArgument.isEmpty()) {
@@ -61,10 +55,18 @@ public class KCommand implements CommandExecutor {
     }
 
     private void sendInvalidUsage(Player player) {
-        player.sendMessage(ChatColor.DARK_GREEN + "Keyword Commands:");
+        String helpTopLn = config.getHelpTopLine();
+        String helpBottomLn = config.getHelpBottomLine();
+        String helpFormat = config.getHelpFormat();
+
+        if (!helpTopLn.equals("")) player.sendMessage(helpTopLn);
+        Container<Integer> accessNum = new Container<>(0);
         Arrays.stream(arguments).forEach(argument -> {
-            if (player.hasPermission(argument.getPermission()))
-                player.sendMessage(ChatColor.GREEN + "/keywords " + argument.getUsage() + ChatColor.GRAY + " - " + argument.getDesc());
+            if (player.hasPermission(argument.getPermission())) {
+                if (!helpFormat.equals("")) player.sendMessage(String.format(helpFormat, "/keywords", argument.getUsage(), argument.getDesc()));
+                accessNum.set(accessNum.get()+1);
+            }
         });
+        if (!helpBottomLn.equals("")) player.sendMessage(String.format(helpBottomLn, accessNum.get()));
     }
 }

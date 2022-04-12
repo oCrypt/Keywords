@@ -1,7 +1,7 @@
 package me.cahrypt.com.keywords;
 
 import me.cahrypt.com.keywords.command.KCommand;
-import me.cahrypt.com.keywords.command.argument.List;
+import me.cahrypt.com.keywords.command.argument.ListCmd;
 import me.cahrypt.com.keywords.command.argument.Reload;
 import me.cahrypt.com.keywords.config.ConfigManager;
 import me.cahrypt.com.keywords.listener.TalkListener;
@@ -10,7 +10,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Keywords extends JavaPlugin {
     private static Keywords instance;
-    private static ConfigManager config;
+    private ConfigManager config;
 
     @Override
     public void onEnable() {
@@ -20,7 +20,7 @@ public final class Keywords extends JavaPlugin {
         new TalkListener();
 
         getCommand("keywords").setExecutor(new KCommand(
-                new List(),
+                new ListCmd(),
                 new Reload()
         ));
 
@@ -43,7 +43,7 @@ public final class Keywords extends JavaPlugin {
         return instance;
     }
 
-    public static ConfigManager getConfigManager() {
+    public ConfigManager getConfigManager() {
         return config;
     }
 }

@@ -1,16 +1,18 @@
-# Here is where you can add your own custom emotes for keywords.
+# Here is where you can add your own custom emotes for custom keywords.
 # Simply specify the keyword you wish to use on the SAME INDENTATION LINE as the examples below, followed by a colon,
 # then paste your emote.
 
-# Always include QUOTATION MARKS around your emote to prevent print errors when using codes
+# Always include QUOTATION MARKS around your emotes and keywords to prevent print errors when using codes
+
+# IMPORTANT NOTE: Usage of color codes and HEX codes is supported
 
 keywords:
-  bear: '#123456ʕ &4•ᴥ•#123456ʔ'
-  happy: '&e◉‿◉'
-  sad: '(︶︹︺)'
+  ':bear:': '#123456ʕ &4•ᴥ•#123456ʔ'
+  '!happy': '&e◉‿◉'
+  '@sad': '&b(︶︹︺)'
 
-# Below is the error that will be sent to users when they attempt to run the '/keywords' command without sufficient
-# permissions. For no message, set the text to ''
+# Below is the error that will be sent to users when they attempt to run plugin commands without sufficient permissions.
+# For no message, set the text to ''
 
 cmd-permission-error: '&4You do not have permission to run that command!'
 
@@ -20,4 +22,20 @@ cmd-permission-error: '&4You do not have permission to run that command!'
 list-cmd-topln: '&aList of Emotes and Keywords:'
 list-cmd-bottomln: '&aClick to use!'
 
-# IMPORTANT NOTE: Usage of color codes and HEX codes is supported
+# Below is the text that appears in the keywords help page, accessed by '/keywords help', or through invalid cmd usage
+# For no message, set the text to ''
+
+help-cmd-topln: '&aList of Keyword Commands:'
+
+# Bottom line is parameterized with an integer value (%d) that corresponds to the amount of commands the player has access to.
+# To use this value, simply place '%d' in the string anywhere! For no message, set the text to ''
+
+help-cmd-bottomln: '&7You have access to %d keyword commands'
+
+# The commands that display are formatted in the below parameterized string with 3 string values (%1$s, %2$s, %$s).
+# %1$s = '/keywords', %2$s = Command Arguments, %3$s = Command Description
+
+# Changing anything besides the colors is not recommended if you are unfamiliar with parameterized strings, but play around with it!
+# For no cmd help messages, set text to '' (although I'm not sure why you would want to do that)
+
+help-cmd-cmds: '&7- &a%1$s %2$s &7|| %3$s'
