@@ -22,7 +22,7 @@ cmd-permission-error: '&4You do not have permission to run that command!'
 list-cmd-topln: '&aList of Emotes and Keywords:'
 list-cmd-bottomln: '&aClick to use!'
 
-# Below is the text that appears in the keywords help page, accessed by '/keywords help', or through invalid cmd usage
+# Below is the text that appears in the keywords help page, accessed through invalid cmd usage
 # For no message, set the text to ''
 
 help-cmd-topln: '&aList of Keyword Commands:'

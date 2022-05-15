@@ -9,12 +9,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Keywords extends JavaPlugin {
-    private static Keywords instance;
     private ConfigManager config;
 
     @Override
     public void onEnable() {
-        instance = this;
         config = new ConfigManager();
 
         new TalkListener();
@@ -24,23 +22,19 @@ public final class Keywords extends JavaPlugin {
                 new Reload()
         ));
 
-        update(true);
+        logStatus(true);
     }
 
     @Override
     public void onDisable() {
-        update(false);
+        logStatus(false);
     }
 
-    private void update(boolean enabled) {
+    private void logStatus(boolean enabled) {
         Bukkit.getLogger().info("----------------------------------");
         Bukkit.getLogger().info(getDescription().getName() + " version " + getDescription().getVersion() + (enabled ? " enabled " : " disabled ") + "successfully!");
         Bukkit.getLogger().info("Author: " + getDescription().getAuthors());
         Bukkit.getLogger().info("----------------------------------");
-    }
-
-    public static Keywords getInstance() {
-        return instance;
     }
 
     public ConfigManager getConfigManager() {

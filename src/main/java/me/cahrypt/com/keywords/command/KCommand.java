@@ -3,23 +3,23 @@ package me.cahrypt.com.keywords.command;
 import me.cahrypt.com.keywords.Keywords;
 import me.cahrypt.com.keywords.command.argument.Argument;
 import me.cahrypt.com.keywords.config.ConfigManager;
-import me.cahrypt.com.keywords.container.Container;
 import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Arrays;
 import java.util.Optional;
+import java.util.concurrent.atomic.AtomicReference;
 
 public class KCommand implements CommandExecutor {
     private final ConfigManager config;
     private final Argument[] arguments;
 
     public KCommand(Argument... arguments) {
-        this.config = Keywords.getInstance().getConfigManager();
+        this.config = JavaPlugin.getPlugin(Keywords.class).getConfigManager();
         this.arguments = arguments;
     }
 
@@ -30,7 +30,7 @@ public class KCommand implements CommandExecutor {
             return true;
         }
 
-        String cmdPermError = config.getCmdPermError();
+        String cmdPermError = config.getCommandPermissionError();
         Optional<Argument> rawArgument = getArgument(args);
 
         if (rawArgument.isEmpty()) {
@@ -59,14 +59,20 @@ public class KCommand implements CommandExecutor {
         String helpBottomLn = config.getHelpBottomLine();
         String helpFormat = config.getHelpFormat();
 
-        if (!helpTopLn.equals("")) player.sendMessage(helpTopLn);
-        Container<Integer> accessNum = new Container<>(0);
+        if (!helpTopLn.equals("")) {
+            player.sendMessage(helpTopLn);
+        }
+        AtomicReference<Integer> accessNum = new AtomicReference<>(0);
         Arrays.stream(arguments).forEach(argument -> {
             if (player.hasPermission(argument.getPermission())) {
-                if (!helpFormat.equals("")) player.sendMessage(String.format(helpFormat, "/keywords", argument.getUsage(), argument.getDesc()));
+                if (!helpFormat.equals("")) {
+                    player.sendMessage(String.format(helpFormat, "/keywords", argument.getUsage(), argument.getDesc()));
+                }
                 accessNum.set(accessNum.get()+1);
             }
         });
-        if (!helpBottomLn.equals("")) player.sendMessage(String.format(helpBottomLn, accessNum.get()));
+        if (!helpBottomLn.equals("")) {
+            player.sendMessage(String.format(helpBottomLn, accessNum.get()));
+        }
     }
 }

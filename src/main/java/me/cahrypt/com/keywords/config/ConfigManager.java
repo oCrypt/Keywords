@@ -3,6 +3,7 @@ package me.cahrypt.com.keywords.config;
 import me.cahrypt.com.keywords.Keywords;
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.*;
 import java.util.regex.Matcher;
@@ -14,16 +15,16 @@ public class ConfigManager {
     private FileConfiguration config;
 
     private Map<String, String> keywords;
-    private String cmdPermError;
-    private String listTopLn;
-    private String listBottomLn;
-    private String helpTopLn;
-    private String helpBottomLn;
+    private String commandPermissionError;
+    private String listTopLine;
+    private String listBottomLine;
+    private String helpTopLine;
+    private String helpBottomLine;
     private String helpFormat;
 
 
     public ConfigManager() {
-        this.main = Keywords.getInstance();
+        this.main = JavaPlugin.getPlugin(Keywords.class);
         reload();
     }
 
@@ -45,11 +46,11 @@ public class ConfigManager {
                 .sorted(Map.Entry.comparingByKey(Comparator.comparing(String::length).reversed()))
                 .forEach(stringObjectEntry -> keywords.put(stringObjectEntry.getKey(), translateCodes(stringObjectEntry.getValue().toString())));
 
-        cmdPermError = translateCodes(config.getString("cmd-permission-error"));
-        listTopLn = translateCodes(config.getString("list-cmd-topln"));
-        listBottomLn = translateCodes(config.getString("list-cmd-bottomln"));
-        helpTopLn = translateCodes(config.getString("help-cmd-topln"));
-        helpBottomLn = translateCodes(config.getString("help-cmd-bottomln"));
+        commandPermissionError = translateCodes(config.getString("cmd-permission-error"));
+        listTopLine = translateCodes(config.getString("list-cmd-topln"));
+        listBottomLine = translateCodes(config.getString("list-cmd-bottomln"));
+        helpTopLine = translateCodes(config.getString("help-cmd-topln"));
+        helpBottomLine = translateCodes(config.getString("help-cmd-bottomln"));
         helpFormat = translateCodes(config.getString("help-cmd-cmds"));
     }
 
@@ -67,24 +68,24 @@ public class ConfigManager {
         return keywords;
     }
 
-    public String getCmdPermError() {
-        return cmdPermError;
+    public String getCommandPermissionError() {
+        return commandPermissionError;
     }
 
     public String getListTopLine() {
-        return listTopLn;
+        return listTopLine;
     }
 
     public String getListBottomLine() {
-        return listBottomLn;
+        return listBottomLine;
     }
 
     public String getHelpTopLine() {
-        return helpTopLn;
+        return helpTopLine;
     }
 
     public String getHelpBottomLine() {
-        return helpBottomLn;
+        return helpBottomLine;
     }
 
     public String getHelpFormat() {

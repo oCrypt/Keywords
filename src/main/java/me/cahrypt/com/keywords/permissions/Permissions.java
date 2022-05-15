@@ -1,13 +1,13 @@
 package me.cahrypt.com.keywords.permissions;
 
-public enum Perm {
+public enum Permissions {
 
     USER("keywords.user"),
     ADMIN("keywords.admin");
 
     private String perm;
 
-    Perm(String perm) {
+    Permissions(String perm) {
         this.perm = perm;
     }
 

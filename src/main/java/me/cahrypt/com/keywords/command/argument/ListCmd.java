@@ -2,13 +2,14 @@ package me.cahrypt.com.keywords.command.argument;
 
 import me.cahrypt.com.keywords.Keywords;
 import me.cahrypt.com.keywords.config.ConfigManager;
-import me.cahrypt.com.keywords.permissions.Perm;
+import me.cahrypt.com.keywords.permissions.Permissions;
 import net.md_5.bungee.api.ChatColor;
 import net.md_5.bungee.api.chat.ClickEvent;
 import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.entity.Player;
+import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
 
@@ -16,8 +17,8 @@ public class ListCmd extends Argument {
     private final ConfigManager config;
 
     public ListCmd() {
-        super(Perm.USER.getPerm() + ".list", "list", "View all keywords and emotes", "list");
-        config = Keywords.getInstance().getConfigManager();
+        super(Permissions.USER.getPerm() + ".list", "list", "View all keywords and emotes", "list");
+        config = JavaPlugin.getPlugin(Keywords.class).getConfigManager();
     }
 
     @Override
@@ -26,7 +27,10 @@ public class ListCmd extends Argument {
         String listBottomLn = config.getListBottomLine();
         Map<String, String> keywords = config.getKeywords();
 
-        if (!listTopLn.equals("")) player.sendMessage(listTopLn);
+        if (!listTopLn.equals("")) {
+            player.sendMessage(listTopLn);
+        }
+
         TextComponent msg = new TextComponent();
         keywords.forEach((keyword, emote) -> {
             TextComponent replaceComp = new TextComponent(TextComponent.fromLegacyText(emote));
@@ -37,6 +41,9 @@ public class ListCmd extends Argument {
             msg.addExtra(" ");
         });
         player.spigot().sendMessage(msg);
-        if (!listBottomLn.equals("")) player.sendMessage(listBottomLn);
+
+        if (!listBottomLn.equals("")) {
+            player.sendMessage(listBottomLn);
+        }
     }
 }
