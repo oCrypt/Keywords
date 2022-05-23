@@ -1,25 +1,27 @@
 package me.cahrypt.com.keywords;
 
 import me.cahrypt.com.keywords.command.KCommand;
+import me.cahrypt.com.keywords.command.argument.ConversionsCmd;
 import me.cahrypt.com.keywords.command.argument.ListCmd;
-import me.cahrypt.com.keywords.command.argument.Reload;
+import me.cahrypt.com.keywords.command.argument.ReloadCmd;
 import me.cahrypt.com.keywords.config.ConfigManager;
-import me.cahrypt.com.keywords.listener.TalkListener;
+import me.cahrypt.com.keywords.listener.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public final class Keywords extends JavaPlugin {
     private ConfigManager config;
+    private ListenerManager listenerManager;
 
     @Override
     public void onEnable() {
-        config = new ConfigManager();
-
-        new TalkListener();
+        this.config = new ConfigManager();
+        this.listenerManager = new ListenerManager();
 
         getCommand("keywords").setExecutor(new KCommand(
                 new ListCmd(),
-                new Reload()
+                new ReloadCmd(),
+                new ConversionsCmd()
         ));
 
         logStatus(true);
@@ -39,5 +41,9 @@ public final class Keywords extends JavaPlugin {
 
     public ConfigManager getConfigManager() {
         return config;
+    }
+
+    public ListenerManager getListenerManager() {
+        return listenerManager;
     }
 }

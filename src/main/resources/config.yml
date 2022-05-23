@@ -11,6 +11,14 @@ keywords:
   '!happy': '&e◉‿◉'
   '@sad': '&b(︶︹︺)'
 
+# Below are player interactions that involve typing. To enable/disable keyword conversion into emotes, simply specify either true or false
+# (By default all are set to true)
+
+public-chat: true
+item-renaming: true
+book-editing: true
+sign-editing: true
+
 # Below is the error that will be sent to users when they attempt to run plugin commands without sufficient permissions.
 # For no message, set the text to ''
 
@@ -25,7 +33,7 @@ list-cmd-bottomln: '&aClick to use!'
 # Below is the text that appears in the keywords help page, accessed through invalid cmd usage
 # For no message, set the text to ''
 
-help-cmd-topln: '&aList of Keyword Commands:'
+help-cmd-topln: '&aInvalid Command! View valid commands here:'
 
 # Bottom line is parameterized with an integer value (%d) that corresponds to the amount of commands the player has access to.
 # To use this value, simply place '%d' in the string anywhere! For no message, set the text to ''

@@ -1,6 +1,5 @@
 package me.cahrypt.com.keywords.command.argument;
 
-import me.cahrypt.com.keywords.Keywords;
 import me.cahrypt.com.keywords.config.ConfigManager;
 import me.cahrypt.com.keywords.permissions.Permissions;
 import net.md_5.bungee.api.ChatColor;
@@ -9,7 +8,6 @@ import net.md_5.bungee.api.chat.HoverEvent;
 import net.md_5.bungee.api.chat.TextComponent;
 import net.md_5.bungee.api.chat.hover.content.Text;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.java.JavaPlugin;
 
 import java.util.Map;
 
@@ -17,8 +15,8 @@ public class ListCmd extends Argument {
     private final ConfigManager config;
 
     public ListCmd() {
-        super(Permissions.USER.getPerm() + ".list", "list", "View all keywords and emotes", "list");
-        config = JavaPlugin.getPlugin(Keywords.class).getConfigManager();
+        super(Permissions.USER.getPerm() + ".list", "list", "View all keywords and emotes you're able to use", "list");
+        config = main.getConfigManager();
     }
 
     @Override

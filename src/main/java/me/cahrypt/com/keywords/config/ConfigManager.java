@@ -11,10 +11,16 @@ import java.util.regex.Pattern;
 
 public class ConfigManager {
     private final Keywords main;
-    private final Pattern hexPattern = Pattern.compile("#[a-fA-f0-9]{6}");
+    private final Pattern hexPattern;
     private FileConfiguration config;
 
+    private boolean convertChat;
+    private boolean convertItem;
+    private boolean convertSign;
+    private boolean convertBook;
+
     private Map<String, String> keywords;
+
     private String commandPermissionError;
     private String listTopLine;
     private String listBottomLine;
@@ -25,10 +31,11 @@ public class ConfigManager {
 
     public ConfigManager() {
         this.main = JavaPlugin.getPlugin(Keywords.class);
-        reload();
+        this.hexPattern = Pattern.compile("#[a-fA-f0-9]{6}");
+        reloadConfig();
     }
 
-    public void reload() {
+    public void reloadConfig() {
         main.reloadConfig();
         main.getConfig().options().copyDefaults();
         main.saveDefaultConfig();
@@ -38,6 +45,11 @@ public class ConfigManager {
     }
 
     private void extractConfigVals() {
+        convertChat = config.getBoolean("public-chat");
+        convertItem = config.getBoolean("item-renaming");
+        convertSign = config.getBoolean("sign-editing");
+        convertBook = config.getBoolean("book-editing");
+
         keywords = new LinkedHashMap<>();
         config.getConfigurationSection("keywords")
                 .getValues(false)
@@ -62,6 +74,22 @@ public class ConfigManager {
             matcher = hexPattern.matcher(msg);
         }
         return ChatColor.translateAlternateColorCodes('&', msg) + ChatColor.RESET;
+    }
+
+    public boolean canConvertChat() {
+        return convertChat;
+    }
+
+    public boolean canConvertItem() {
+        return convertItem;
+    }
+
+    public boolean canConvertSign() {
+        return convertSign;
+    }
+
+    public boolean canConvertBook() {
+        return convertBook;
     }
 
     public Map<String, String> getKeywords() {
