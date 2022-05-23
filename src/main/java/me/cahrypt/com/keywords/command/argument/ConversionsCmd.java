@@ -16,14 +16,14 @@ public class ConversionsCmd extends Argument {
     @Override
     public void execute(Player player, String[] args) {
         player.sendMessage(
-                ChatColor.GRAY + "Chat Conversions: " + getColor(config.canConvertChat()) + "\n"
-                + ChatColor.GRAY + "Item Conversions: " + getColor(config.canConvertItem()) + "\n"
-                + ChatColor.GRAY + "Book Conversions: " + getColor(config.canConvertBook()) + "\n"
-                + ChatColor.GRAY + "Sign Conversions: " + getColor(config.canConvertSign())
+                ChatColor.GRAY + "Chat Conversions: " + getColoredBoolean(config.canConvertChat()) + "\n"
+                + ChatColor.GRAY + "Item Conversions: " + getColoredBoolean(config.canConvertItem()) + "\n"
+                + ChatColor.GRAY + "Book Conversions: " + getColoredBoolean(config.canConvertBook()) + "\n"
+                + ChatColor.GRAY + "Sign Conversions: " + getColoredBoolean(config.canConvertSign())
         );
     }
 
-    private String getColor(boolean conversion) {
+    private String getColoredBoolean(boolean conversion) {
         return (conversion ? ChatColor.GREEN + "true" : ChatColor.RED + "false");
     }
 }
