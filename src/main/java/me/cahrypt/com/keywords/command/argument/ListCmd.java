@@ -25,7 +25,7 @@ public class ListCmd extends Argument {
         String listBottomLn = config.getListBottomLine();
         Map<String, String> keywords = config.getKeywords();
 
-        if (!listTopLn.equals("")) {
+        if (!listTopLn.isEmpty()) {
             player.sendMessage(listTopLn);
         }
 
@@ -40,7 +40,7 @@ public class ListCmd extends Argument {
         });
         player.spigot().sendMessage(msg);
 
-        if (!listBottomLn.equals("")) {
+        if (!listBottomLn.isEmpty()) {
             player.sendMessage(listBottomLn);
         }
     }

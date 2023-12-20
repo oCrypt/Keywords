@@ -5,7 +5,7 @@ public enum Permissions {
     USER("keywords.user"),
     ADMIN("keywords.admin");
 
-    private String perm;
+    private final String perm;
 
     Permissions(String perm) {
         this.perm = perm;

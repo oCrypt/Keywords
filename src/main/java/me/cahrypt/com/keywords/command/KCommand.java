@@ -41,7 +41,7 @@ public class KCommand implements CommandExecutor {
         Argument argument = rawArgument.get();
 
         if (!player.hasPermission(argument.getPermission())) {
-            if (!cmdPermError.equals("")) player.sendMessage(cmdPermError);
+            if (!cmdPermError.isEmpty()) player.sendMessage(cmdPermError);
             return true;
         }
 
@@ -59,19 +59,19 @@ public class KCommand implements CommandExecutor {
         String helpBottomLn = config.getHelpBottomLine();
         String helpFormat = config.getHelpFormat();
 
-        if (!helpTopLn.equals("")) {
+        if (!helpTopLn.isEmpty()) {
             player.sendMessage(helpTopLn);
         }
         AtomicReference<Integer> accessNum = new AtomicReference<>(0);
         Arrays.stream(arguments).forEach(argument -> {
             if (player.hasPermission(argument.getPermission())) {
-                if (!helpFormat.equals("")) {
+                if (!helpFormat.isEmpty()) {
                     player.sendMessage(String.format(helpFormat, "/keywords", argument.getUsage(), argument.getDesc()));
                 }
                 accessNum.set(accessNum.get()+1);
             }
         });
-        if (!helpBottomLn.equals("")) {
+        if (!helpBottomLn.isEmpty()) {
             player.sendMessage(String.format(helpBottomLn, accessNum.get()));
         }
     }
